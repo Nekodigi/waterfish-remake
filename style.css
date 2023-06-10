@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.box1,
+.box2,
+.box3,
+.box4 {
+  width: 50%;
+}
+.box3 {
+  margin-top: 140px;
+  display: none;
+}
+button {
+  position: absolute;
+  bottom: 29%;
+  right: 22%;
+  height: 40px;
+  width: 100px;
+}
