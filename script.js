@@ -181,6 +181,9 @@ var random_index = 0
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 var index = urlParams.get('hand')
+if(index == null){
+  index = 0;
+} 
 
 //sleep function
 
