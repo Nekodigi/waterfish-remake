@@ -1,14 +1,27 @@
 export var hands_required_angles = [
+  /*
+    for (let i = 0; i < 5; i++) {
+    if (
+      (selected_hands[i][1] > 0 &&
+        angles[i] <= Math.abs(selected_hands[i][1])) ||
+      (selected_hands[i][1] < 0 && angles[i] >= Math.abs(selected_hands[i][1]))
+    );
+    else {
+      flag = false;
+      break;
+    }
+  }
+  */
   //0 
   [
     [
       [4, 1, 0], //landmark points
-      -150 //required angle
+      -90 //required angle
     ],
 
     [
       [5, 0, 1], //landmark points
-      -35 //required angle 
+      -10 //required angle 
     ],
 
     [
