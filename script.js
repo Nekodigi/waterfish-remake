@@ -1,33 +1,28 @@
 import { find_angle } from "./function/angle.js";
 import { hands_required_angles } from "./consts/hand.js";
-import { drawLandmarks } from "./function/draw.js";
+import { drawAngle, drawLandmarks } from "./function/draw.js";
 import { hand_imgs } from "./consts/hand_img.js";
 
 var holding_time = 0;
-var accept_emoji = "✅";
+var accept_emoji = "";
 var required_hoding_time = 100;
 
 var videoWidth = 640;
 var videoHeight = 480;
 
-if (typeof Storage !== "undefined") {
-  // Code for localStorage/sessionStorage.
-} else {
-  // Sorry! No Web Storage support..
-  alert("Sorry please change browser");
-}
+// if (typeof Storage !== "undefined") {
+//   // Code for localStorage/sessionStorage.
+// } else {
+//   // Sorry! No Web Storage support..
+//   alert("Sorry please change browser");
+// }
 
 const videoElement = document.getElementsByClassName("input_video")[0];
 const canvasElement = document.getElementsByClassName("output_canvas")[0];
 const canvasCtx = canvasElement.getContext("2d");
 
 var index = 0;
-// const queryString = window.location.search;
-// const urlParams = new URLSearchParams(queryString);
-// var index = urlParams.get("hand");
-// if (index == null) {
-//   index = 0;
-// }
+var count = 0;
 
 // on page load...
 moveProgressBar();
@@ -49,7 +44,7 @@ export function moveProgressBar() {
   // .stop() used to prevent animation queueing
   $(".progress-bar").stop().animate(
     {
-      left: progressTotal,
+      width: progressTotal,
     },
     animationLength
   );
@@ -57,17 +52,18 @@ export function moveProgressBar() {
 
 startAuth();
 
+var selected_hands = hands_required_angles[index];
 function startAuth() {
   holding_time = 0;
 
   console.log("start auth:" + index);
+  selected_hands = hands_required_angles[index];
   let res_elem = document.getElementById("result");
-  res_elem.innerHTML = `<h2>${"Authenticating:" + index}</h2>`;
+  res_elem.innerHTML = `<h4>${"Auth completed: " + count}</h4>`;
 }
 
+var wrongAngles = [];
 function doMeasureHand(results) {
-  var selected_hands = hands_required_angles[index];
-
   document.getElementById("target_img").src = hand_imgs[index];
   //console.log(selected_hands);
 
@@ -87,6 +83,7 @@ function doMeasureHand(results) {
   }
   canvasCtx.fillText("Holding time: " + String(holding_time), 10, 180);
 
+  wrongAngles = [];
   for (let i = 0; i < 5; i++) {
     if (angles[i] == 0) return;
   }
@@ -96,10 +93,10 @@ function doMeasureHand(results) {
       (selected_hands[i][1] > 0 &&
         angles[i] <= Math.abs(selected_hands[i][1])) ||
       (selected_hands[i][1] < 0 && angles[i] >= Math.abs(selected_hands[i][1]))
-    );
-    else {
+    ) {
+    } else {
+      wrongAngles.push(i);
       flag = false;
-      break;
     }
   }
 
@@ -117,6 +114,7 @@ function doMeasureHand(results) {
       while (index == index_old) {
         index = Math.floor(Math.random() * 3);
       }
+      count++;
       startAuth();
     }
   } else {
@@ -130,8 +128,7 @@ function doMeasureHand(results) {
 //This is the loop start
 function onResults(results) {
   canvasCtx.save();
-  canvasElement.width = videoWidth;
-  canvasElement.height = videoHeight;
+  canvasElement.height = (canvasElement.width / videoWidth) * videoHeight;
   canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
   canvasCtx.drawImage(
     results.image,
@@ -143,11 +140,23 @@ function onResults(results) {
   if (results.multiHandLandmarks) {
     for (const landmarks of results.multiHandLandmarks) {
       drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {
-        color: "#00FF00",
-        lineWidth: 5,
+        color: "rgba(0, 255, 0, 0.4)",
+        lineWidth: 2,
       });
-      drawLandmarks(canvasCtx, landmarks, { color: "#FF0000", lineWidth: 2 });
+      drawLandmarks(canvasCtx, landmarks, {
+        color: "rgba(255, 0, 0, 0.4)",
+        lineWidth: 1,
+      });
     }
+  }
+  for (let wa of wrongAngles) {
+    drawAngle(
+      canvasCtx,
+      results.multiHandLandmarks,
+      selected_hands[wa][0][0],
+      selected_hands[wa][0][1],
+      selected_hands[wa][0][2]
+    );
   }
 
   doMeasureHand(results);
@@ -180,5 +189,6 @@ const camera = new Camera(videoElement, {
   //height: 360
 });
 canvasCtx.font = "30px Arial";
+canvasCtx.fillStyle = "#ffffff";
 canvasCtx.fillText("Please allow camera permission, Loading...", 10, 50);
 camera.start();

@@ -1,16 +1,15 @@
-@import "compass/css3";
-
 .progress {
   width: 100%;
-  height: 50px;
+  height: 24px;
+  border-radius: 20px;
 }
 .progress-wrap {
-  background: #f80;
+  border: 2px solid white;
   margin: 20px 0;
   overflow: hidden;
   position: relative;
   .progress-bar {
-    background: #ddd;
+    background: #14ff00;
     left: 0;
     position: absolute;
     top: 0;
