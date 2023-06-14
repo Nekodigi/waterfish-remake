@@ -15,12 +15,30 @@ export function drawAngle(ctx, landmarks, a, b, c) {
 
   ctx.save();
 
+  let dotR = 10;
+
   ctx.beginPath();
-  ctx.arc(b.x, b.y, 30, bc, ac);
-  ctx.lineTo(b.x, b.y);
+  ctx.arc(a.x, a.y, dotR, 0, 2 * Math.PI);
   ctx.fillStyle = "rgba(255, 0, 0, 0.7)";
   ctx.fill();
   ctx.closePath();
+  ctx.beginPath();
+  ctx.arc(b.x, b.y, dotR, 0, 2 * Math.PI);
+  ctx.fillStyle = "rgba(255, 0, 0, 0.7)";
+  ctx.fill();
+  ctx.closePath();
+  ctx.beginPath();
+  ctx.arc(c.x, c.y, dotR, 0, 2 * Math.PI);
+  ctx.fillStyle = "rgba(255, 0, 0, 0.7)";
+  ctx.fill();
+  ctx.closePath();
+
+  // ctx.beginPath();
+  // ctx.arc(b.x, b.y, 30, bc, ac);
+  // ctx.lineTo(b.x, b.y);
+  // ctx.fillStyle = "rgba(255, 0, 0, 0.7)";
+  // ctx.fill();
+  // ctx.closePath();
 
   ctx.beginPath();
   ctx.moveTo(a.x, a.y);
