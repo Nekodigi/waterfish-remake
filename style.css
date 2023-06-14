@@ -64,7 +64,7 @@ h1 {
   border-radius: 8px;
   overflow: hidden;
 }
-.input_video {
+#input_video {
   display: block;
   width: 100%;
 }
