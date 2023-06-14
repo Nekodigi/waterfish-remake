@@ -5,25 +5,35 @@
   <meta charset="utf-8">
 
   <link rel="stylesheet" href="style.css" ></link>
+  <link rel="stylesheet" href="progress.css" ></link>
 
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
-  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
   <!-- <script src="draw.js"></script> -->
   <script src="handler.js"></script>
+  <script type="module" src="visual/progress.js"></script>
   <script type="module" src="script.js"></script>
+
+
+  
 </head>
 
 <body>
   <div id="result"></div>
+  <div class="progress-wrap progress" data-progress-percent="25">
+    <div class="progress-bar progress"></div>
+  </div>
   <div class="container">
     <div class="box1"><canvas id="2d" class="output_canvas" width="640" height="480"></canvas></div>
     <div class="box2"><img src="" id="target_img" width="600" /></div>
   </div>
   <button onclick="changeBtn()">切換</button>
   <div class="box3" id="box3"><video class="input_video" style="width: 640px; height: 480px"></video></div>
+
 
 </body>
 

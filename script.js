@@ -5,6 +5,7 @@ import { hand_imgs } from "./consts/hand_img.js";
 
 var holding_time = 0;
 var accept_emoji = "✅";
+var required_hoding_time = 100;
 
 var videoWidth = 640;
 var videoHeight = 480;
@@ -27,6 +28,32 @@ var index = 0;
 // if (index == null) {
 //   index = 0;
 // }
+
+// on page load...
+moveProgressBar();
+// on browser resize...
+$(window).resize(function () {
+  moveProgressBar();
+});
+
+// SIGNATURE PROGRESS
+export function moveProgressBar() {
+  console.log("moveProgressBar");
+  //var getPercent = $(".progress-wrap").data("progress-percent") / 100;
+  var getProgressWrapWidth = $(".progress-wrap").width();
+  var progressTotal =
+    (holding_time / required_hoding_time) * getProgressWrapWidth;
+  var animationLength = 0;
+
+  // on page load, animate percentage bar to data percentage length
+  // .stop() used to prevent animation queueing
+  $(".progress-bar").stop().animate(
+    {
+      left: progressTotal,
+    },
+    animationLength
+  );
+}
 
 startAuth();
 
@@ -82,7 +109,7 @@ function doMeasureHand(results) {
 
     holding_time += 1;
 
-    if (holding_time > 99) {
+    if (holding_time > required_hoding_time) {
       alert("successful");
 
       index = Number(index);
@@ -95,6 +122,9 @@ function doMeasureHand(results) {
   } else {
     holding_time = 0;
   }
+
+  // $(".progress-wrap").attr("data-progress-percent", holding_time);
+  moveProgressBar();
 }
 
 //This is the loop start
