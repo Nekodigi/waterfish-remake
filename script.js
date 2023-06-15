@@ -5,7 +5,7 @@ import { hand_imgs } from "./consts/hand_img.js";
 
 var holding_time = 0;
 var accept_emoji = "";
-var required_hoding_time = 100;
+var required_holding_time = 100;
 
 var videoWidth = 640;
 var videoHeight = 480;
@@ -37,7 +37,7 @@ export function moveProgressBar() {
   //var getPercent = $(".progress-wrap").data("progress-percent") / 100;
   var getProgressWrapWidth = $(".progress-wrap").width();
   var progressTotal =
-    (holding_time / required_hoding_time) * getProgressWrapWidth;
+    (holding_time / required_holding_time) * getProgressWrapWidth;
   var animationLength = 0;
 
   // on page load, animate percentage bar to data percentage length
@@ -106,7 +106,7 @@ function doMeasureHand(results) {
 
     holding_time += 1;
 
-    if (holding_time > required_hoding_time) {
+    if (holding_time > required_holding_time) {
       alert("successful");
 
       index = Number(index);
