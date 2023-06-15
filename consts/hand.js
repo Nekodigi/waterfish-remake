@@ -16,26 +16,26 @@ export var hands_required_angles = [
   [
     [
       [4, 1, 0], //landmark points
-      -90 //required angle
+      -110 //required angle
     ],
 
     [
-      [5, 0, 1], //landmark points
-      -10 //required angle 
+      [5, 1, 2], //landmark points
+      -40 //required angle 
     ],
 
     [
       [6, 5, 9], //landmark points
-      90 //required angle
+      80 //required angle
     ],
 
     [
-      [12, 11, 9], //landmark points
+      [16, 15, 14], //landmark points
       -170  //required angle
     ],
 
     [
-      [14, 13, 17], //landmark points
+      [18, 17, 13], //landmark points
       120  //required angle
     ]
   ],
@@ -54,7 +54,7 @@ export var hands_required_angles = [
 
     [
       [10, 9, 13], //landmark points
-      110 //required angle
+      130 //required angle
     ],
 
     [
