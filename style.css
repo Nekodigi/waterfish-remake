@@ -38,12 +38,18 @@ h1 {
   flex-wrap: wrap;
   gap: 24px;
 }
-#box1 {
-  width: 100%;
+.green-border {
+  padding: 0px !important;
   border: 2px solid #14ff00;
+}
+.box1 {
+  padding: 2px;
+  box-sizing: content-box;
+  width: 100%;
   border-radius: 8px;
   overflow: hidden;
 }
+
 .output_canvas {
   display: block;
   width: 100%;

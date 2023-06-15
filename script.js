@@ -117,8 +117,10 @@ function doMeasureHand(results) {
       count++;
       startAuth();
     }
+    $(".box1").addClass("green-border");
   } else {
     holding_time = 0;
+    $(".box1").removeClass("green-border");
   }
 
   // $(".progress-wrap").attr("data-progress-percent", holding_time);
