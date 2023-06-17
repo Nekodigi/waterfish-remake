@@ -44,7 +44,7 @@ export var hands_required_angles = [
   [
     [
       [16, 14, 13], //landmark points
-      -175 //required angle
+      -150 //required angle
     ],
 
     [
